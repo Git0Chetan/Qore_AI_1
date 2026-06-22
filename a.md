@@ -26,7 +26,7 @@ flowchart TB
   subgraph Managed["🔌 Managed cloud services"]
     SB["Supabase\nPostgres + RLS · Auth · Storage"]
     LK["LiveKit Cloud\nrealtime rooms · agent dispatch · STT/TTS gateway"]
-    GROQ["Groq API\nLLM + vision (OpenAI-compatible)"]
+    Ollama["LLM + gemma for vision (OpenAI-compatible)"]
     ANAM["Anam\navatar video persona"]
     YT["YouTube Data API"]
     RESEND["Resend (email, optional)"]
@@ -67,8 +67,8 @@ flowchart TB
 
 | Capability | Model / Service | Where it runs | Used for |
 |---|---|---|---|
-| Text LLM | **Groq `llama-3.3-70b-versatile`** | platform, quiz, voice-agent | ATS scoring, resume parse, quiz gen, grading, skill-gap, learning path, Career Buddy text, doc-parser transforms, interview scoring |
-| Vision LLM | **Groq `llama-4-scout-17b-16e-instruct`** | voice-agent | Screen monitoring (tab-switch), webcam proctoring (faces/gaze/phone) |
+| Text LLM | **Ollama** | platform, quiz, voice-agent | ATS scoring, resume parse, quiz gen, grading, skill-gap, learning path, Career Buddy text, doc-parser transforms, interview scoring |
+| Vision LLM | **Gemma** | voice-agent | Screen monitoring (tab-switch), webcam proctoring (faces/gaze/phone) |
 | Speech-to-Text | **AssemblyAI `universal-streaming`** (via LiveKit inference) | LiveKit | Candidate/employee speech in interviews & Buddy |
 | Text-to-Speech | **Cartesia `sonic-3`** (via LiveKit inference) | LiveKit | Agent voice |
 | Voice activity / turns | **Silero VAD** + LiveKit **MultilingualModel** | voice-agent | Turn detection |
@@ -94,7 +94,7 @@ sequenceDiagram
   participant C as Candidate (browser)
   participant PF as platform
   participant SB as Supabase
-  participant G as Groq
+  participant G as Ollama/Gemma
   participant QF as quiz-frontend
   participant VA as voice-agent
   participant LK as LiveKit
@@ -103,7 +103,7 @@ sequenceDiagram
   PF->>SB: store resume (Storage) + application (DB)
   PF->>G: parse resume + ATS score vs JD
   G-->>PF: ats_score + breakdown + reasoning
-  PF->>SB: update application; gate on ATS threshold
+  PF->>SB: update application - gate on ATS threshold ;
   Note over PF: pass → assessment_assigned · fail → ats_rejected
 
   C->>PF: Start assessment (identity check)
@@ -136,7 +136,7 @@ sequenceDiagram
   participant LK as LiveKit Cloud
   participant VA as voice-agent
   participant ANAM as Anam
-  participant G as Groq
+  participant G as Ollama/Gemma
 
   U->>PF: Start voice/video session
   PF->>PF: verify role/stage, mint LiveKit token
@@ -250,7 +250,7 @@ flowchart TB
   subgraph EXT["External managed"]
     sb["Supabase"]
     lk["LiveKit Cloud"]
-    gq["Groq"]
+    gq["ollama / Gemma "]
     an["Anam"]
     yt["YouTube API"]
   end
