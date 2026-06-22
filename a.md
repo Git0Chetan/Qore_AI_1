@@ -47,13 +47,13 @@ flowchart TB
 
   PF -->|"handoff ?token (HMAC)"| QF
   PF -->|"handoff ?lkToken + ?returnUrl"| AUI
-  QF -->|"questions / grade"| GROQ
+  QF -->|"questions / grade"| Ollama
   QF -->|"context + results (CORS)"| PF
 
   AUI <-->|"WebRTC audio/video"| LK
   VA <-->|"join room, publish A/V"| LK
   VA -->|"avatar video"| ANAM
-  VA -->|"vision + chat"| GROQ
+  VA -->|"vision + chat"| Ollama/Gemma
   VA <-->|"context + results (x-agent-secret)"| PF
 
   LK -. "STT/TTS/VAD inference" .-> VA
@@ -103,7 +103,7 @@ sequenceDiagram
   PF->>SB: store resume (Storage) + application (DB)
   PF->>G: parse resume + ATS score vs JD
   G-->>PF: ats_score + breakdown + reasoning
-  PF->>SB: update application - gate on ATS threshold ;
+  PF->>SB: update application - gate on ATS threshold 
   Note over PF: pass → assessment_assigned · fail → ats_rejected
 
   C->>PF: Start assessment (identity check)
@@ -112,7 +112,7 @@ sequenceDiagram
   QF->>G: generate JD questions + grade coding
   Note over C,QF: ProctorAgent watches via LiveKit room
   QF->>PF: POST /api/assessment/result (token)
-  PF->>SB: assessment score; pass/fail vs test threshold
+  PF->>SB: assessment score pass/fail vs test threshold
 
   C->>PF: Start AI interview
   PF->>LK: mint token (room interview_<id>)
