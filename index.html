@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Qore.AI — Worldline AI Innovation Challenge 2026</title>
+<meta name="description" content="Qore.AI — AI-Driven Intelligent Hiring Orchestrator with Autonomous Skill Assessment, Real-Time Proctoring and Personalized Learning Pathways. Submission for the Worldline AI Innovation Challenge 2026." />
+<style>
+  /* ============================================================
+     Qore.AI — Worldline submission · self-contained styles
+     ============================================================ */
+  :root{
+    --bg:#070b14; --bg2:#0a1020;
+    --surface:rgba(255,255,255,.04); --surface2:rgba(255,255,255,.06);
+    --solid:#0f1626; --border:rgba(148,163,184,.16); --border2:rgba(148,163,184,.30);
+    --text:#e8eef8; --muted:#9fb0cc; --faint:#64748b;
+    --cyan:#22d3ee; --indigo:#6366f1; --violet:#8b5cf6; --purple:#a855f7;
+    --green:#34d399; --amber:#fbbf24; --red:#fb7185;
+    --grad:linear-gradient(120deg,#22d3ee 0%,#6366f1 45%,#a855f7 100%);
+    --grad2:linear-gradient(120deg,#22d3ee,#a855f7);
+    --radius:18px; --radius-sm:12px;
+    --shadow:0 20px 50px -24px rgba(0,0,0,.75);
+    --maxw:1160px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--text); background:var(--bg);
+    font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.6; overflow-x:hidden;
+    background-image:
+      radial-gradient(900px 520px at 10% -8%,rgba(34,211,238,.10),transparent 60%),
+      radial-gradient(900px 620px at 100% 2%,rgba(168,85,247,.12),transparent 55%),
+      radial-gradient(760px 700px at 50% 118%,rgba(99,102,241,.08),transparent 60%);
+    background-attachment:fixed;
+  }
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,h4{letter-spacing:-.02em;margin:0;line-height:1.12}
+  p{margin:0}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .grad-text{background:var(--grad2);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+  .muted{color:var(--muted)}
+  .center{text-align:center}
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:100;backdrop-filter:blur(14px);
+    background:rgba(7,11,20,.6);border-bottom:1px solid var(--border);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+  .logo{width:32px;height:32px;border-radius:9px;background:var(--grad);display:grid;place-items:center;
+    color:#04121a;font-weight:900;box-shadow:0 8px 20px -8px rgba(34,211,238,.7)}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--muted);font-weight:600;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:11px;font-weight:700;
+    font-size:14px;border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
+  .btn-primary{background:var(--grad);color:#04121a;box-shadow:0 10px 26px -10px rgba(99,102,241,.7)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{background:var(--surface);border-color:var(--border2);color:var(--text)}
+  .btn-ghost:hover{background:var(--surface2);border-color:var(--cyan)}
+  .nav-toggle{display:none;background:none;border:0;color:var(--text);font-size:24px;cursor:pointer}
+
+  /* ---------- Sections ---------- */
+  section{padding:86px 0;position:relative}
+  .section-head{max-width:760px;margin:0 auto 52px}
+  .section-head.center{text-align:center}
+  h2.title{font-size:clamp(28px,4vw,44px);font-weight:800;margin-top:12px}
+  .lead{color:var(--muted);font-size:18px;margin-top:16px}
+
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;
+    border:1px solid var(--border);background:var(--surface);font-size:13px;color:var(--muted)}
+  .dot{width:7px;height:7px;border-radius:999px;background:var(--cyan)}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:26px;box-shadow:var(--shadow);backdrop-filter:blur(10px);transition:transform .25s,border-color .25s}
+  .card:hover{transform:translateY(-4px);border-color:var(--border2)}
+  .grid{display:grid;gap:22px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:24px;margin-bottom:16px;
+    background:rgba(34,211,238,.12);border:1px solid var(--border)}
+  .card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:15px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:96px 0 70px;text-align:center;position:relative;overflow:hidden}
+  .hero-grid::before{content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(ellipse 75% 60% at 50% 30%,#000 30%,transparent 75%);
+    mask-image:radial-gradient(ellipse 75% 60% at 50% 30%,#000 30%,transparent 75%);pointer-events:none}
+  .orb{position:absolute;border-radius:999px;filter:blur(80px);pointer-events:none;z-index:0}
+  .hero h1{font-size:clamp(64px,13vw,150px);font-weight:900;letter-spacing:-.04em;
+    background:linear-gradient(100deg,#22d3ee,#818cf8 40%,#a855f7 70%,#22d3ee);
+    background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 7s linear infinite;position:relative;z-index:1}
+  @keyframes shimmer{to{background-position:200% center}}
+  .hero .sub{font-size:clamp(19px,2.6vw,30px);font-weight:700;margin-top:18px;position:relative;z-index:1}
+  .hero .desc{max-width:660px;margin:20px auto 0;color:var(--muted);font-size:17px;position:relative;z-index:1}
+  .hero-cta{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap;position:relative;z-index:1}
+  .badges{display:flex;gap:12px;justify-content:center;margin-top:44px;flex-wrap:wrap;position:relative;z-index:1}
+
+  /* ---------- Flow ---------- */
+  .flow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .flow-node{flex:1;min-width:150px;max-width:180px;text-align:center;padding:20px 12px;border-radius:14px;
+    background:var(--surface);border:1px solid var(--border)}
+  .flow-node .e{font-size:26px}
+  .flow-node .l{font-size:13px;font-weight:700;margin-top:8px}
+  .flow-arrow{display:grid;place-items:center;color:var(--cyan);font-size:22px}
+
+  /* ---------- Stat / KPI ---------- */
+  .kpi{padding:24px;border-radius:16px;background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
+  .kpi .big{font-size:40px;font-weight:900;line-height:1}
+  .kpi .lbl{color:var(--muted);font-size:13px;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+  .up{color:var(--green)} .down{color:var(--green)}
+
+  /* ---------- Architecture ---------- */
+  .arch{display:flex;flex-direction:column;gap:14px;max-width:960px;margin:0 auto}
+  .layer{display:flex;align-items:center;gap:18px;padding:18px 22px;border-radius:14px;
+    background:var(--surface);border:1px solid var(--border);position:relative}
+  .layer .num{width:52px;height:52px;flex:none;border-radius:13px;display:grid;place-items:center;font-weight:800;font-size:20px;color:#04121a}
+  .layer .lname{flex:none;width:190px;font-weight:700;font-size:15px}
+  .layer .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:6px 13px;border-radius:999px;background:var(--surface2);border:1px solid var(--border2);
+    font-size:12.5px;font-weight:600}
+  .arch-arrow{text-align:center;color:var(--muted);font-size:18px;margin:-6px 0}
+
+  /* ---------- Media / snapshots ---------- */
+  .media{border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;background:var(--solid)}
+  .video-ph{aspect-ratio:16/9;display:grid;place-items:center;position:relative;cursor:pointer;
+    background:linear-gradient(135deg,rgba(34,211,238,.14),rgba(168,85,247,.18))}
+  .play{width:84px;height:84px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);
+    display:grid;place-items:center;border:1.5px solid rgba(255,255,255,.35);transition:transform .2s}
+  .video-ph:hover .play{transform:scale(1.08)}
+  .play svg{margin-left:5px}
+  .video-cap{position:absolute;bottom:16px;left:20px;font-weight:700;font-size:15px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .shot{border-radius:14px;border:1px solid var(--border);overflow:hidden;background:var(--solid)}
+  .shot .img{aspect-ratio:16/10;display:grid;place-items:center;text-align:center;padding:16px;
+    background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(168,85,247,.10));color:var(--muted);font-size:13px}
+  .shot .cap{padding:12px 16px;font-size:13.5px;font-weight:600;border-top:1px solid var(--border)}
+  .shot .img .ic{font-size:32px;display:block;margin-bottom:8px}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  footer{border-top:1px solid var(--border);padding:40px 0;color:var(--faint);font-size:14px}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .tag{font-weight:700}
+  .tag .c{color:var(--cyan)} .tag .v{color:var(--violet)} .tag .p{color:var(--purple)}
+  .note{font-size:12.5px;color:var(--faint);margin-top:14px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .g4{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(2,1fr)}
+    .nav-links{position:fixed;inset:64px 0 auto 0;flex-direction:column;background:rgba(9,14,26,.98);
+      padding:20px 24px;gap:18px;border-bottom:1px solid var(--border);transform:translateY(-140%);transition:transform .3s}
+    .nav-links.open{transform:none}
+    .nav-toggle{display:block}
+    .layer{flex-wrap:wrap} .layer .lname{width:auto}
+  }
+  @media (max-width:620px){
+    .g4,.g3,.g2{grid-template-columns:1fr}
+    section{padding:64px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="logo">Q</span>QORE<span class="grad-text">.AI</span></a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#challenge">Challenge</a>
+      <a href="#solution">Solution</a>
+      <a href="#ai">AI Core</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#impact">Impact</a>
+      <a href="#demo">Demo</a>
+      <a href="#demo" class="btn btn-primary">Watch Demo</a>
+    </nav>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- ============================ HERO ============================ -->
+<a id="top"></a>
+<section class="hero hero-grid">
+  <div class="orb" style="top:-60px;left:6%;width:340px;height:340px;background:rgba(34,211,238,.22)"></div>
+  <div class="orb" style="top:40px;right:4%;width:380px;height:380px;background:rgba(168,85,247,.20)"></div>
+  <div class="wrap">
+    <span class="pill" style="z-index:1;position:relative"><span class="dot"></span>Worldline AI Innovation Challenge 2026</span>
+    <h1 style="margin-top:26px">Qore.AI</h1>
+    <p class="sub">Hire smarter. Grow faster. <span class="grad-text">All on one AI platform.</span></p>
+    <p class="desc">An <strong>AI-Driven Intelligent Hiring Orchestrator</strong> with Autonomous Skill Assessment,
+      Real-Time Proctoring and Personalized Learning Pathways — running the entire talent journey from applicant
+      to high-performing employee.</p>
+    <div class="hero-cta">
+      <a href="#demo" class="btn btn-primary">▶ &nbsp;Watch the demo</a>
+      <a href="#solution" class="btn btn-ghost">Explore the idea</a>
+    </div>
+    <div class="badges">
+      <span class="pill">🧠 GenAI-native</span>
+      <span class="pill">🛡️ Real-time proctoring</span>
+      <span class="pill">🎙️ AI voice interviews</span>
+      <span class="pill">🚀 Continuous learning</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ONE-LINE JOURNEY ============================ -->
+<section style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="flow">
+      <div class="flow-node"><div class="e">👤</div><div class="l">Candidate</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="e">🧠</div><div class="l">AI Assessment</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="e">🎙️</div><div class="l">AI Interview</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="e">🛡️</div><div class="l">Proctoring</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="e">🏆</div><div class="l">Hiring</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="e">🚀</div><div class="l">Learning</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CHALLENGE ============================ -->
+<section id="challenge">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">The Challenge We're Taking On</span>
+      <h2 class="title">Talent is the bottleneck to <span class="grad-text">payments innovation</span></h2>
+      <p class="lead">Worldline's leadership in payment &amp; transactional services depends on hiring and
+        continuously upskilling elite engineering, data and product talent — at global scale, at speed, and with
+        the integrity a regulated industry demands. Today, that talent engine is slow, manual and fragmented.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card reveal">
+        <div class="icon">🎯</div>
+        <h3>The problem we solve</h3>
+        <p style="margin-bottom:14px">Enterprise hiring is a fragmented chain of disconnected tools with a manual
+          bottleneck at every hand-off:</p>
+        <ul style="color:var(--muted);font-size:15px;margin:0;padding-left:20px;display:grid;gap:7px">
+          <li>Recruiters spend <strong style="color:var(--text)">~70%</strong> of their time just screening resumes.</li>
+          <li><strong style="color:var(--text)">~40%</strong> of interview effort is wasted on unqualified candidates.</li>
+          <li>Evaluation is inconsistent and prone to interviewer bias.</li>
+          <li>Skill gaps are discovered <em>after</em> the hire — and post-hire training is generic.</li>
+          <li>The result: high cost-per-hire, delayed delivery, and avoidable attrition.</li>
+        </ul>
+      </div>
+
+      <div class="card reveal">
+        <div class="icon">💡</div>
+        <h3>Why it matters to Worldline</h3>
+        <ul style="color:var(--muted);font-size:15px;margin:0;padding-left:20px;display:grid;gap:9px">
+          <li><strong style="color:var(--text)">Talent = velocity.</strong> Every week saved in hiring is a week
+            of payment-product innovation shipped sooner.</li>
+          <li><strong style="color:var(--text)">Integrity is in Worldline's DNA.</strong> Real-time proctoring,
+            identity checks and anomaly detection mirror Worldline's core strength in <em>secure, trusted
+            transactions and fraud detection</em> — the technology transfers.</li>
+          <li><strong style="color:var(--text)">Global scale.</strong> Worldline hires across many countries;
+            an orchestrated, cloud-native platform scales where manual processes can't.</li>
+          <li><strong style="color:var(--text)">AI-ready workforce.</strong> Continuous, personalized upskilling
+            keeps teams current with the AI and payments transformation.</li>
+          <li><strong style="color:var(--text)">Retention.</strong> Clear growth pathways reduce attrition of
+            scarce, expensive engineering talent.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:22px;background:linear-gradient(120deg,rgba(34,211,238,.08),rgba(168,85,247,.08))">
+      <div class="icon">📈</div>
+      <h3>The impact of solving it</h3>
+      <div class="grid g4" style="margin-top:8px;gap:16px">
+        <div><div class="grad-text" style="font-size:30px;font-weight:900">Faster</div><p class="muted" style="font-size:14px">time-to-hire → faster product delivery</p></div>
+        <div><div class="grad-text" style="font-size:30px;font-weight:900">Fairer</div><p class="muted" style="font-size:14px">consistent, bias-reduced, auditable evaluation</p></div>
+        <div><div class="grad-text" style="font-size:30px;font-weight:900">Leaner</div><p class="muted" style="font-size:14px">lower cost-per-hire &amp; interviewer load</p></div>
+        <div><div class="grad-text" style="font-size:30px;font-weight:900">Ready</div><p class="muted" style="font-size:14px">a continuously upskilled, AI-ready workforce</p></div>
+      </div>
+      <p class="note">Bonus for Worldline: the underlying capabilities — real-time anomaly detection, identity
+        verification and agentic orchestration — are reusable assets that echo Worldline's own payments &amp;
+        fraud-prevention platforms.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SOLUTION ============================ -->
+<section id="solution">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">The Solution</span>
+      <h2 class="title">One AI brain, <span class="grad-text">seven coordinated modules</span></h2>
+      <p class="lead">Qore.AI replaces the fragmented tool-chain with a single orchestrated platform sharing one
+        AI core and one skill-graph data model.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card reveal"><div class="icon">📄</div><h3>AI Resume Intelligence</h3><p>Semantic parsing and ATS scoring against the job description — transparent, ranked, no manual triage.</p></div>
+      <div class="card reveal"><div class="icon">🧪</div><h3>Autonomous Skill Assessment</h3><p>AI-generated MCQ + live coding rounds, tailored to the role at runtime — not a static question bank.</p></div>
+      <div class="card reveal"><div class="icon">🛡️</div><h3>Real-Time Proctoring</h3><p>A vision model watches for tab-switching, extra faces and phones — integrity you can trust.</p></div>
+      <div class="card reveal"><div class="icon">🎙️</div><h3>AI Interview Orchestration</h3><p>A real-time AI interviewer with a lifelike avatar runs the JD-driven round and returns a structured decision.</p></div>
+      <div class="card reveal"><div class="icon">📊</div><h3>Candidate Ranking Engine</h3><p>Every signal — resume, assessment, interview — fused into an explainable ranking for recruiters.</p></div>
+      <div class="card reveal"><div class="icon">🚀</div><h3>Personalized Learning Pathways</h3><p>Post-hire skill-gap analysis → tailored learning paths → a 24/7 AI career coach. The loop competitors miss.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ AI CORE ============================ -->
+<section id="ai">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">AI at the Core</span>
+      <h2 class="title">GenAI-native, <span class="grad-text">not an AI badge on legacy</span></h2>
+      <p class="lead">Six GenAI capabilities on a modern, provider-agnostic stack.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card reveal"><div class="icon">🔎</div><h3>Resume Understanding</h3><p>Semantic profile extraction &amp; skill-graph generation.</p></div>
+      <div class="card reveal"><div class="icon">🧩</div><h3>Skill Intelligence</h3><p>Maps candidates to roles via a competency knowledge graph.</p></div>
+      <div class="card reveal"><div class="icon">🧠</div><h3>Dynamic Assessments</h3><p>GenAI generates and grades questions on the fly.</p></div>
+      <div class="card reveal"><div class="icon">🗣️</div><h3>AI Interviewer</h3><p>Conversational evaluation &amp; automated scoring.</p></div>
+      <div class="card reveal"><div class="icon">👁️</div><h3>Vision Proctoring</h3><p>Face, tab-switch &amp; anomaly detection in real time.</p></div>
+      <div class="card reveal"><div class="icon">🎓</div><h3>Learning Pathways</h3><p>Personalized upskilling recommendations.</p></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:24px">
+      <h3 style="margin-bottom:16px">⚡ Technology Stack</h3>
+      <div class="grid g4" style="gap:16px">
+        <div><strong>Frontend / APIs</strong><p class="muted" style="font-size:14px">Next.js 15 · React 19 · TypeScript</p></div>
+        <div><strong>Data · Auth · Storage</strong><p class="muted" style="font-size:14px">Supabase — Postgres + RLS</p></div>
+        <div><strong>Real-time A/V</strong><p class="muted" style="font-size:14px">LiveKit Cloud + LiveKit Agents</p></div>
+        <div><strong>Text AI</strong><p class="muted" style="font-size:14px">Groq · Llama 3.3 70B</p></div>
+        <div><strong>Vision AI</strong><p class="muted" style="font-size:14px">Groq · Llama 4 Scout (multimodal)</p></div>
+        <div><strong>Speech</strong><p class="muted" style="font-size:14px">AssemblyAI STT · Cartesia TTS · Silero VAD</p></div>
+        <div><strong>Avatar</strong><p class="muted" style="font-size:14px">Anam persona video</p></div>
+        <div><strong>Deployment</strong><p class="muted" style="font-size:14px">Railway · Docker worker</p></div>
+      </div>
+      <p class="note">🔌 <strong>Provider-agnostic:</strong> all AI runs through an OpenAI-compatible interface, so
+        models can be swapped by config — including <strong>self-hosted Ollama + Gemma</strong> for full data
+        residency inside Worldline's own VPC, with zero re-architecture.</p>
+    </div>
+
+    <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px">
+      <span class="chip center reveal">🤖 LLMs</span>
+      <span class="chip center reveal">🔎 RAG</span>
+      <span class="chip center reveal">🧮 Vector DB</span>
+      <span class="chip center reveal">🕸️ Knowledge Graphs</span>
+      <span class="chip center reveal">🧠 Agentic AI</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ARCHITECTURE ============================ -->
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">End-to-End Architecture</span>
+      <h2 class="title">A clean, <span class="grad-text">5-layer cloud-native stack</span></h2>
+      <p class="lead">Augments — not replaces — your enterprise systems of record.</p>
+    </div>
+    <div class="arch">
+      <div class="layer reveal">
+        <div class="num" style="background:var(--cyan)">01</div>
+        <div class="lname">Candidate Channels</div>
+        <div class="chips"><span class="chip">Career Portal</span><span class="chip">LinkedIn</span><span class="chip">Job Boards</span><span class="chip">Internal Mobility</span></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="layer reveal">
+        <div class="num" style="background:var(--indigo)">02</div>
+        <div class="lname">Qore.AI Platform</div>
+        <div class="chips"><span class="chip">Resume Parser</span><span class="chip">Knowledge Graph</span><span class="chip">Assessment Engine</span><span class="chip">Proctoring Engine</span><span class="chip">Interview Intelligence</span><span class="chip">Recommendation Engine</span></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="layer reveal">
+        <div class="num" style="background:var(--violet)">03</div>
+        <div class="lname">GenAI Layer</div>
+        <div class="chips"><span class="chip">LLM Services</span><span class="chip">Prompt Orchestration</span><span class="chip">RAG Engine</span><span class="chip">Skill Mapping</span></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="layer reveal">
+        <div class="num" style="background:var(--purple)">04</div>
+        <div class="lname">Enterprise Systems</div>
+        <div class="chips"><span class="chip">HRMS</span><span class="chip">ATS</span><span class="chip">LMS</span><span class="chip">Analytics Platform</span></div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="layer reveal">
+        <div class="num" style="background:var(--cyan)">05</div>
+        <div class="lname">Dashboards &amp; Insights</div>
+        <div class="chips"><span class="chip">Recruiter Dashboard</span><span class="chip">Leadership Dashboard</span><span class="chip">Candidate Portal</span></div>
+      </div>
+    </div>
+    <p class="note center" style="margin-top:24px">Security by design: Postgres Row-Level Security · server-only
+      service keys · HMAC-signed assessment tokens · role-gated real-time access · avatar-disconnect watchdog with
+      voice-only fallback.</p>
+  </div>
+</section>
+
+<!-- ============================ IMPACT / KPI ============================ -->
+<section id="impact">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">Business Value Delivered</span>
+      <h2 class="title">Outcomes that move the <span class="grad-text">enterprise</span></h2>
+    </div>
+    <div class="grid g4">
+      <div class="kpi reveal"><div class="big down">▼ 60%</div><div class="lbl">Hiring cycle time</div></div>
+      <div class="kpi reveal"><div class="big up">▲ 85%</div><div class="lbl">Screening automation</div></div>
+      <div class="kpi reveal"><div class="big up">▲ 3×</div><div class="lbl">Recruiter productivity</div></div>
+      <div class="kpi reveal"><div class="big up">▲ 90%</div><div class="lbl">Assessment coverage</div></div>
+      <div class="kpi reveal"><div class="big down">▼ 40%</div><div class="lbl">Operational cost</div></div>
+      <div class="kpi reveal"><div class="big up">▲ 35%</div><div class="lbl">Candidate quality</div></div>
+      <div class="kpi reveal"><div class="big up">▲ 50%</div><div class="lbl">Learning adoption</div></div>
+      <div class="kpi reveal"><div class="big grad-text">24/7</div><div class="lbl">AI career coaching</div></div>
+    </div>
+    <p class="note center" style="margin-top:22px">Figures are design-target benchmarks based on the platform
+      architecture, to be validated in a Worldline pilot.</p>
+
+    <!-- Roadmap -->
+    <div class="section-head center reveal" style="margin-top:70px">
+      <span class="kicker">Scalability &amp; Roadmap</span>
+      <h2 class="title">From hiring platform to <span class="grad-text">talent-intelligence ecosystem</span></h2>
+    </div>
+    <div class="grid g4">
+      <div class="card reveal"><div class="icon">🤖</div><h3>Phase 1</h3><p><strong>Current State</strong> — AI hiring automation.</p></div>
+      <div class="card reveal"><div class="icon">🔮</div><h3>Phase 2</h3><p><strong>Enhanced Intelligence</strong> — predictive hiring analytics.</p></div>
+      <div class="card reveal"><div class="icon">🛰️</div><h3>Phase 3</h3><p><strong>Autonomous Ecosystem</strong> — multi-agent recruiting.</p></div>
+      <div class="card reveal"><div class="icon">🌐</div><h3>Phase 4</h3><p><strong>Talent Marketplace</strong> — internal-mobility optimization.</p></div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px">
+      <span class="chip center reveal">☁️ Cloud-native</span>
+      <span class="chip center reveal">🌍 Multi-region</span>
+      <span class="chip center reveal">🔒 Enterprise security</span>
+      <span class="chip center reveal">📈 Millions of evaluations</span>
+      <span class="chip center reveal">⚡ Real-time inference</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TEASER + DEMO ============================ -->
+<section id="demo">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">Teaser &amp; Demo</span>
+      <h2 class="title">See <span class="grad-text">Qore.AI</span> in action</h2>
+      <p class="lead">A 60-second teaser and a full product walkthrough.</p>
+    </div>
+
+    <div class="grid g2">
+      <!-- TEASER -->
+      <div class="reveal">
+        <div class="media">
+          <!-- TODO: replace this placeholder with your teaser embed.
+               Example: <iframe src="https://www.youtube.com/embed/VIDEO_ID" style="width:100%;aspect-ratio:16/9;border:0" allowfullscreen></iframe> -->
+          <div class="video-ph" onclick="alert('Add your teaser video link in index.html (see the TODO comment).')">
+            <div class="play"><svg width="30" height="34" viewBox="0 0 30 34" fill="#fff"><path d="M0 0l30 17L0 34z"/></svg></div>
+            <div class="video-cap">▶ 60-second teaser</div>
+          </div>
+        </div>
+        <p class="muted center" style="margin-top:12px;font-size:14px">Quick, high-energy overview of the idea.</p>
+      </div>
+
+      <!-- DEMO -->
+      <div class="reveal">
+        <div class="media">
+          <!-- TODO: replace with your demo video embed (YouTube/Vimeo iframe or <video src="demo.mp4" controls>). -->
+          <div class="video-ph" onclick="alert('Add your demo video link in index.html (see the TODO comment).')">
+            <div class="play"><svg width="30" height="34" viewBox="0 0 30 34" fill="#fff"><path d="M0 0l30 17L0 34z"/></svg></div>
+            <div class="video-cap">▶ Full product demo</div>
+          </div>
+        </div>
+        <p class="muted center" style="margin-top:12px;font-size:14px">End-to-end walkthrough: apply → assess → interview → hire → learn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SNAPSHOTS ============================ -->
+<section id="snapshots" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">Product Snapshots</span>
+      <h2 class="title">Inside the <span class="grad-text">platform</span></h2>
+      <p class="lead">Real screens from the working build.</p>
+    </div>
+    <!-- TODO: replace each .img placeholder block with <img src="snapshots/xxx.png" style="width:100%;display:block" alt="..."> -->
+    <div class="grid g3">
+      <div class="shot reveal"><div class="img"><span><span class="ic">🖥️</span>snapshots/landing.png</span></div><div class="cap">Landing &amp; candidate portal</div></div>
+      <div class="shot reveal"><div class="img"><span><span class="ic">📊</span>snapshots/hr-dashboard.png</span></div><div class="cap">HR hiring pipeline dashboard</div></div>
+      <div class="shot reveal"><div class="img"><span><span class="ic">📄</span>snapshots/ats-score.png</span></div><div class="cap">AI resume / ATS scoring</div></div>
+      <div class="shot reveal"><div class="img"><span><span class="ic">🧪</span>snapshots/assessment.png</span></div><div class="cap">Proctored assessment (MCQ + coding)</div></div>
+      <div class="shot reveal"><div class="img"><span><span class="ic">🎙️</span>snapshots/ai-interview.png</span></div><div class="cap">AI interview with avatar</div></div>
+      <div class="shot reveal"><div class="img"><span><span class="ic">🚀</span>snapshots/learning.png</span></div><div class="cap">Learning &amp; Career Buddy</div></div>
+    </div>
+    <p class="note center" style="margin-top:20px">Drop your PNG/JPG screenshots into a <code>snapshots/</code> folder
+      and swap the placeholders (see the TODO comment in the HTML).</p>
+  </div>
+</section>
+
+<!-- ============================ CTA ============================ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="card reveal center" style="padding:56px 32px;background:radial-gradient(700px 320px at 50% 0%,rgba(34,211,238,.14),transparent 70%),var(--surface);border-color:var(--border2)">
+      <h2 class="title">Transforming talent acquisition <span class="grad-text">through AI</span></h2>
+      <p class="lead" style="margin-bottom:26px">Built for Worldline. Ready to pilot.</p>
+      <div class="hero-cta" style="margin-top:0">
+        <a href="#demo" class="btn btn-primary">▶ Watch the demo</a>
+        <a href="#top" class="btn btn-ghost">Back to top</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <div class="brand" style="font-size:18px"><span class="logo" style="width:28px;height:28px;font-size:15px">Q</span>QORE<span class="grad-text">.AI</span></div>
+      <p style="margin-top:8px">Submission · Worldline AI Innovation Challenge 2026</p>
+      <!-- TODO: add your team details -->
+      <p style="margin-top:4px"><strong>Qore Ai Team</strong> · Chetan Patil · Contact: chetan.patil@worldline.com · Suraj Nanajkar · Contact: suraj.nanajkar@worldline.com </p>
+    </div>
+    <div class="tag">
+      <span class="c">Connect</span> • <span class="v">Innovate</span> • <span class="p">Transform</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  var t=document.getElementById('navtoggle'),l=document.getElementById('navlinks');
+  t.addEventListener('click',function(){l.classList.toggle('open')});
+  l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open')})});
+
+  // Scroll reveal
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>
